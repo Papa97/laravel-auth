@@ -13,6 +13,7 @@
                         {{$post->content}} 
                     </p>
                     <div class="pubblished">pubblicato il: {{$post->created_at}}</div>
+                    <a href="{{route("posts.show", $post->id)}}"><button type="button" class="btn btn-outline-primary">Vai al post</button></a>
                 </div>
             </div>
             @endforeach
