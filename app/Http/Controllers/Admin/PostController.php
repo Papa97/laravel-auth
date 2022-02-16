@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -43,10 +44,31 @@ class PostController extends Controller
         $request->validate([
             "title" => "required|string|max:100",
             "content" => "required",
-            "published" => "sometimes|boolean"
+            "published" => "sometimes|accepted"
         ]);
 
-        dd($data);
+        $newPost = new Post();
+        $newPost->title = $data['title'];
+        $newPost->content = $data['content'];
+
+        if(isset($data['publisged'])) {
+            $newPost->published = true;
+        }
+
+        $slug = Str::of($newPost->title)->slug("-");
+        $count = 1;
+
+        while(Post::where("slug", $slug)->first()) {
+            $slug = Str::of($newPost->title)->slug("-") . "-{$count}";
+            $count++;
+            
+        }
+
+        $newPost->slug = $slug;
+
+        $newPost->save();
+
+        return redirect()->route('posts.show', $newPost->id);
     }
 
     /**

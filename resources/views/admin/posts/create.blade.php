@@ -2,10 +2,11 @@
 
 @section('content')
 <div class="container">
-    <form>
+    <form action="{{route("posts.store")}}" method="POST">
+        @csrf
         <div class="form-group">
           <label for="title">Titolo</label>
-          <input type="text" class="form-control" id="title" placeholder="inserisci il titolo del post">
+          <input type="text" class="form-control" id="title" name="title" placeholder="inserisci il titolo del post">
         </div>
 
         <div class="form-group">
