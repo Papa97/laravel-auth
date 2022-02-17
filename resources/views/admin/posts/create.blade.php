@@ -22,8 +22,8 @@
           </div>
         
         <div class="form-group">
-          <label for="category">Contenuto</label>
-          <select class="custom-select" @error('category_id') is-invalid @enderror aria-label="Default select example" id="category_id" name="category">
+          <label for="category_id">Contenuto</label>
+          <select class="custom-select" @error('category_id') is-invalid @enderror aria-label="Default select example" id="category_id" name="category_id">
             <option >Categorie</option>
             @foreach ($categories as $category)
                 <option value="{{$category->id}}" {{old('category_id') ? 'selected' : ''}}>{{$category->name}}</option>
