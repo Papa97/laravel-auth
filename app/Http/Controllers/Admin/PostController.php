@@ -15,7 +15,7 @@ class PostController extends Controller
         "title" => "required|string|max:100",
         "content" => "required",
         "published" => "sometimes|accepted",
-        "category_id" => "nullable|exists:categories,id "
+        "category_id" => "nullable|exists:categories,id"
     ];
 
     /**
@@ -52,10 +52,15 @@ class PostController extends Controller
     {
 
         $data = $request->all();
-        $request->validate($this->validationRule);
+        // $request->validate($this->validationRule);
+        $request->validate([
+            "title" => "required|string|max:100",
+            "content" => "required",
+            "published" => "sometimes|accepted",
+            "category_id" => "nullable|exists:categories,id"
+        ]);
 
         // dd($data);
-        
 
         $newPost = new Post();
         $newPost->title = $data['title'];
@@ -75,7 +80,7 @@ class PostController extends Controller
         }
 
         $newPost->slug = $slug;
-        // $newPost->category_id = $data['category_id'];
+        $newPost->category_id = $data['category_id'];
 
         $newPost->save();
 
