@@ -21,10 +21,24 @@
 
           </div>
         
+        <div class="form-group">
+          <label for="category">Contenuto</label>
+          <select class="custom-select" @error('category_id') is-invalid @enderror aria-label="Default select example" id="category_id" name="category">
+            <option >Categorie</option>
+            @foreach ($categories as $category)
+                <option value="{{$category->id}}" {{old('category_id') ? 'selected' : ''}}>{{$category->name}}</option>
+            @endforeach
+          </select>
+          @error('category_id')
+                <div class="alert alert-danger">{{$message}}</div> 
+            @enderror
+        </div>
+
+
         <div class="form-group form-check">
 
-            <input type="checkbox" class="form-check-input @error('published') is-invalid @enderror" id="published" name="published"{{old('published') ? 'checked' : ''}}>
-            <label class="form-check-label" for="exampleCheck1">Pubblica</label>
+          <input type="checkbox" class="form-check-input @error('published') is-invalid @enderror" id="published" name="published"{{old('published') ? 'checked' : ''}}>
+          <label class="form-check-label" for="exampleCheck1">Pubblica</label>
             @error('published')
                 <div class="alert alert-danger">{{$message}}</div> 
             @enderror

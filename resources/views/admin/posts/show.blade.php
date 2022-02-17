@@ -10,6 +10,8 @@
         @else
             <div>non pubblicato</div>
         @endif
+
+    <div>{{$post->category_id}}</div>
 </div>
 
 @endsection
